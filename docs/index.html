@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FacePrintPay Build Fixer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔧 FacePrintPay Build Fixer</h1>
+            <div class="subtitle">Interactive Dashboard for 66 Failed Builds</div>
+            <div class="timestamp">Updated: <span id="timestamp"></span></div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="summary">
+            <div class="card">
+                <div class="card-title">Total Builds</div>
+                <div class="card-value info" id="total-builds">0</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Failed Builds</div>
+                <div class="card-value failed" id="failed-builds">0</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Success Rate</div>
+                <div class="card-value success" id="success-rate">0%</div>
+            </div>
+            <div class="card">
+                <div class="card-title">Repos Affected</div>
+                <div class="card-value warning" id="affected-repos">0</div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('overview')">📊 Overview</button>
+            <button class="tab-button" onclick="switchTab('failures')">❌ Failures</button>
+            <button class="tab-button" onclick="switchTab('categories')">🏷️ Categories</button>
+            <button class="tab-button" onclick="switchTab('fixes')">🔧 Quick Fixes</button>
+            <button class="tab-button" onclick="switchTab('commands')">⚙️ Commands</button>
+        </div>
+
+        <!-- Tab: Overview -->
+        <div id="overview" class="tab-content active">
+            <h2>📈 Build Status Overview</h2>
+            <div class="chart-container">
+                <canvas id="statusChart"></canvas>
+            </div>
+            <div class="action-items">
+                <h3>Next Steps:</h3>
+                <ol>
+                    <li>Review failed builds by category</li>
+                    <li>Run quick fix scripts</li>
+                    <li>Verify environment configuration</li>
+                    <li>Re-trigger builds</li>
+                    <li>Monitor success rate</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Tab: Failures -->
+        <div id="failures" class="tab-content">
+            <h2>Failed Builds</h2>
+            <input type="text" class="search-box" id="failureSearch" placeholder="Search by repo or workflow...">
+            <table class="builds-table">
+                <thead>
+                    <tr>
+                        <th>Repository</th>
+                        <th>Workflow</th>
+                        <th>Branch</th>
+                        <th>Commit</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="failures-tbody"></tbody>
+            </table>
+        </div>
+
+        <!-- Tab: Categories -->
+        <div id="categories" class="tab-content">
+            <h2>Failures by Category</h2>
+            <div id="categories-list" class="categories-grid"></div>
+        </div>
+
+        <!-- Tab: Quick Fixes -->
+        <div id="fixes" class="tab-content">
+            <h2>🚀 Recommended Fixes</h2>
+            <pre id="quick-fixes-content"></pre>
+            <button class="button" onclick="copyToClipboard('quick-fixes-content')">📋 Copy</button>
+        </div>
+
+        <!-- Tab: Commands -->
+        <div id="commands" class="tab-content">
+            <h2>📋 Debug Commands</h2>
+            <pre id="commands-content"></pre>
+        </div>
+    </div>
+
+    <script src="assets/data-processor.js"></script>
+    <script src="assets/dashboard.js"></script>
+</body>
+</html>

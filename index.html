@@ -1,0 +1,14 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>FacePrintPay Builds</title>
+<style>body{font-family:monospace;background:#0d1117;color:#c9d1d9;padding:20px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:15px;margin:10px 0}
+.success{color:#3fb950}.failed{color:#f85149}</style></head><body>
+<h1>🔧 FacePrintPay Build Dashboard</h1>
+<div id="stats" class="card">Loading...</div>
+<div class="card"><h3>Failed Builds</h3><pre id="failures"></pre></div>
+<script>
+fetch('data/builds-complete.json').then(r=>r.json()).then(b=>{
+const t=b.length,f=b.filter(x=>x.conclusion==='failure').length,s=b.filter(x=>x.conclusion==='success').length;
+document.getElementById('stats').innerHTML=`<p class="success">✅ Success: ${s}</p><p class="failed">❌ Failed: ${f}</p><p>Total: ${t}</p>`;
+document.getElementById('failures').textContent=b.filter(x=>x.conclusion==='failure').slice(0,30).map(x=>`[${x.repo}] ${x.workflow}`).join('\n')||'None';
+});
+</script></body></html>

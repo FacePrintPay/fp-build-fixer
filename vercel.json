@@ -1,0 +1,1 @@
+{"version":2,"name":"fp-build-fixer","buildCommand":"npm run build","outputDirectory":"dist","framework":null}
